@@ -1,8 +1,6 @@
-package com.melo.j2ee;
+package com.melo.bio.j2ee;
 
-import java.io.IOException;
 import java.io.OutputStream;
-import java.rmi.server.ExportException;
 
 public class HttpServletResponse {
     OutputStream os;

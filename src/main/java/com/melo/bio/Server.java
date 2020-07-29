@@ -1,8 +1,8 @@
 package com.melo.bio;
 
-import com.melo.j2ee.HttpServlet;
-import com.melo.j2ee.HttpServletRequest;
-import com.melo.j2ee.HttpServletResponse;
+import com.melo.bio.j2ee.HttpServlet;
+import com.melo.bio.j2ee.HttpServletRequest;
+import com.melo.bio.j2ee.HttpServletResponse;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -10,9 +10,12 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
     static int defaultPort = 8080;
+    ExecutorService executorService;
     static Map<String, HttpServlet> servletMapping = new HashMap<>();
     Properties webxml = new Properties();
     private  void loadMapping(){
@@ -46,15 +49,29 @@ public class Server {
 
 
     }
+    private void initThreadPoll(){
+        executorService = Executors.newFixedThreadPool(20);
+
+    }
     /**
      * 启动tomcat
      */
     public  void start() throws IOException {
         loadMapping();
+        initThreadPoll();
         ServerSocket serverSocket = new ServerSocket(defaultPort);
         while (true){
-            Socket socket = serverSocket.accept();
-            process(socket);
+            final Socket socket = serverSocket.accept();
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        process(socket);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 

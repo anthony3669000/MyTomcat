@@ -1,8 +1,8 @@
 package com.melo.servlet;
 
-import com.melo.j2ee.HttpServlet;
-import com.melo.j2ee.HttpServletRequest;
-import com.melo.j2ee.HttpServletResponse;
+import com.melo.bio.j2ee.HttpServlet;
+import com.melo.bio.j2ee.HttpServletRequest;
+import com.melo.bio.j2ee.HttpServletResponse;
 
 public class FristServlet extends HttpServlet {
     @Override

@@ -1,4 +1,4 @@
-package com.melo.j2ee;
+package com.melo.bio.j2ee;
 
 import java.io.InputStream;
 

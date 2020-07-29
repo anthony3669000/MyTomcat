@@ -1,6 +1,6 @@
 package com.melo;
 
-import com.melo.bio.Server;
+import com.melo.netty.Server;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class App 
 {
-    public static void main( String[] args ) throws IOException {
+    public static void main( String[] args ) throws IOException, InterruptedException {
         new Server().start();
     }
 }
